@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'student_form',
+    'captcha_app',
+    'employee_app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

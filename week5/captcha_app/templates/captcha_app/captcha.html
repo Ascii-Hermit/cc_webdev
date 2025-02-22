@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Captcha Verification</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 50px;
+      }
+      #captcha {
+        border: 1px solid #000;
+        padding: 10px;
+        display: inline-block;
+        margin-bottom: 10px;
+      }
+      #message {
+        font-weight: bold;
+        margin-top: 10px;
+      }
+      #user_input {
+        font-size: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Captcha Verification</h2>
+
+    <form method="POST">
+      {% csrf_token %}
+      <div id="captcha">
+        <img src="data:image/png;base64,{{ captcha_image }}" alt="Captcha" />
+      </div>
+      <br />
+      <input
+        type="text"
+        name="user_input"
+        id="user_input"
+        {%
+        if
+        disabled
+        %}disabled{%
+        endif
+        %}
+      />
+      <br /><br />
+      <button type="submit" {% if disabled %}disabled{% endif %}>Submit</button>
+    </form>
+
+    <div id="message">{{ message }}</div>
+  </body>
+</html>

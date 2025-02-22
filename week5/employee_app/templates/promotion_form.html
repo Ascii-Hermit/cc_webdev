@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Promotion Check</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <h2>Check Promotion Eligibility</h2>
+    <form id="promotionForm" method="post">
+      {% csrf_token %} {{ form.as_p }}
+      <button type="submit">Am I Eligible for Promotion?</button>
+    </form>
+    <h3>Eligibility: <span id="result">{{ result }}</span></h3>
+
+    <script>
+      $(document).ready(function () {
+        $("#promotionForm").on("submit", function (event) {
+          event.preventDefault();
+          $.ajax({
+            type: "POST",
+            url: "",
+            data: $(this).serialize(),
+            success: function (response) {
+              $("#result").text(response.result);
+            },
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
